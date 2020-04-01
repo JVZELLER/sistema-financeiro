@@ -1,18 +1,36 @@
 defmodule SistemaFinanceiro do
-  @moduledoc """
-  Documentation for `SistemaFinanceiro`.
-  """
+  require Money
+  require AccountRepository
 
-  @doc """
-  Hello world.
+  def start do
+    AccountRepository.all()
+      |> list_accounts()
+  end
 
-  ## Examples
+  def list_accounts(accounts \\ %{}) do
+    IO.puts "Código\t | Titular\t | Saldo"
+    Map.keys(accounts)
+      |> Enum.each(
+          fn code ->
+          %{:owner => owner, :balance => balance} = accounts[code]
+          IO.puts "#{code}\t #{owner}\t #{Money.display(balance)}"
+        end)
 
-      iex> SistemaFinanceiro.hello()
-      :world
+    get_command(accounts)
+  end
 
-  """
-  def hello do
-    :world
+  def get_command(accounts) do
+    input = IO.gets("\n(L)istar usuários \t(R)ateio entre usuários \t(C)âmbio \t(S)air: ")
+      |> String.trim()
+      |> String.downcase()
+
+    case input do
+        "c" -> "Implement CAMBIO function"
+        "l" -> list_accounts(accounts)
+        "r" -> "Implement SPLIT function"
+        "s" -> IO.puts "\nAté breve :)\n"
+        _   -> IO.puts "\nInforme uma opção válida!!!"
+               get_command(accounts)
+      end
   end
 end
