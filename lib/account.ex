@@ -6,7 +6,7 @@ defmodule Account do
        code: entry["code"],
        owner: entry["owner"],
        balance: Money.new(%{
-         "amount" => String.to_integer(entry["balance"]),
+         "amount" => entry["balance"],
          "currency_code" => entry["currency_code"]
       })
      }
