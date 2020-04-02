@@ -1,14 +1,18 @@
 defmodule Account do
   require Money
 
-  def new(entry) do
-     %{
-       code: entry["code"],
-       owner: entry["owner"],
-       balance: Money.new(%{
-         "amount" => entry["balance"],
-         "currency_code" => entry["currency_code"]
-      })
-     }
+  defstruct code: "", owner: "", balance: %Money{}
+
+  def new(%{
+        "code" => code,
+        "owner" => owner,
+        "balance" => balance,
+        "currency_code" => currency_code
+      }) do
+    %{
+      code: code,
+      owner: owner,
+      balance: Money.new(%{"amount" => balance, "currency_code" => currency_code})
+    }
   end
 end
