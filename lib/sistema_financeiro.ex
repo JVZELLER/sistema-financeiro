@@ -3,24 +3,24 @@ defmodule SistemaFinanceiro do
   require AccountRepository
 
   def start do
-    AccountRepository.all()
-      |> list_accounts()
+    AccountRepository.all() |> list_accounts()
   end
 
   def list_accounts(accounts \\ %{}) do
     IO.puts "Código\t | Titular\t | Saldo"
     Map.keys(accounts)
-      |> Enum.each(
-          fn code ->
-          %{:owner => owner, :balance => balance} = accounts[code]
-          IO.puts "#{code}\t #{owner}\t #{Money.display(balance)}"
-        end)
+    |> Enum.each(
+      fn code ->
+        %{:owner => owner, :balance => balance} = accounts[code]
+        IO.puts "#{code}\t #{owner}\t #{Money.display(balance)}"
+      end)
 
     get_command(accounts)
   end
 
   def get_command(accounts) do
-    input = IO.gets("\n(L)istar usuários \t(R)ateio entre usuários \t(C)âmbio \t(S)air: ")
+    input =
+      IO.gets("\n(L)istar usuários \t(R)ateio entre usuários \t(C)âmbio \t(S)air: ")
       |> String.trim()
       |> String.downcase()
 
