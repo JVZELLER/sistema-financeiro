@@ -22,7 +22,7 @@ defmodule Money do
   end
 
   def add(%Money{:amount => money_amount, :currency => currency}, amount) do
-    sum = money_amount + amount
+    sum = money_amount + floor(amount * 100)
     %Money{amount: sum, currency: currency}
   end
 
