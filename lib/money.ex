@@ -13,20 +13,25 @@ defmodule Money do
     "#{money.amount} #{money.currency}"
   end
 
-  def add(money1, money2) do
-    case validate_same_currency(money1, money2) do
-      {:ok, currency} -> sum = money1.amount + money2.amount
+  def add(%Money{:amount => a1, :currency => c1}, %Money{:amount => a2, :currency => c2}) do
+    case validate_same_currency(c1, c2) do
+      {:ok, currency} -> sum = a1 + a2
                          %Money{amount: sum, currency: currency}
       {:error, reason} -> IO.puts reason
     end
   end
 
-  def validate_same_currency(money1, money2) do
-    if money1.currency === money2.currency do
-      {:ok, money1.currency}
+  def add(%Money{:amount => money_amount, :currency => currency}, amount) do
+    sum = money_amount + amount
+    %Money{amount: sum, currency: currency}
+  end
+
+  def validate_same_currency(c1, c2) do
+    if c1 === c2 do
+      {:ok, c1}
     else
       {:error, "Não é possível somar moedas diferentes."
-        <> " Moedas #{money1.currency} e #{money2.currency}."
+        <> " Moedas: #{c1} e #{c2}."
       }
     end
   end
