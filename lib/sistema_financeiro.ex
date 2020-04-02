@@ -25,9 +25,9 @@ defmodule SistemaFinanceiro do
       |> String.downcase()
 
     case input do
-        "c" -> "Implement CAMBIO function"
+        "c" -> IO.puts "\nImplement CAMBIO function"
         "l" -> list_accounts(accounts)
-        "r" -> "Implement SPLIT function"
+        "r" -> IO.puts "\nImplement SPLIT function"
         "s" -> IO.puts "\nAté breve :)\n"
         _   -> IO.puts "\nInforme uma opção válida!!!"
                get_command(accounts)
