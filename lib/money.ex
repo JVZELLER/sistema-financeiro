@@ -4,7 +4,16 @@ defmodule Money do
   """
   defstruct [:amount, :currency]
 
-  def new(amount, currency_code \\ :BRL) when is_integer(amount) do
+  def new(amount, currency_code) when is_integer(amount) do
+    create(amount, currency_code)
+  end
+
+  def new(string_amount, currency_code) when is_binary(string_amount) do
+    {parsed_amount, _} = Integer.parse(string_amount)
+    create(parsed_amount, currency_code)
+  end
+
+  defp create(amount, currency_code) do
     currency = Currency.find!(currency_code)
     # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
     factor = Currency.get_factor(currency)
