@@ -1,47 +1,22 @@
 defmodule Money do
-  defstruct amount: 0, currency: :BRL
+  @moduledoc """
+  Estrutra de dados que representa dinheiro.
+  """
+  defstruct [:amount, :currency]
 
-  def new(entry) do
-    %Money{
-      # always represented as cents
-      amount: parse_amount(entry["amount"]),
-      currency: entry["currency_code"]
-    }
+  def new(amount, currency_code \\ :BRL) when is_integer(amount) do
+    currency = Currency.find!(currency_code)
+    # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
+    factor = Currency.get_factor(currency)
+    %Money{amount: amount * factor, currency: Currency.to_atom(currency)}
   end
 
-  def display(money) do
-    "#{money.amount} #{money.currency}"
+  def add(%Money{currency: currency} = a, %Money{currency: currency} = b) do
+    %Money{amount: a.amount + b.amount, currency: currency}
   end
 
-  def add(%Money{:amount => a1, :currency => c1}, %Money{:amount => a2, :currency => c2}) do
-    case validate_same_currency(c1, c2) do
-      {:ok, currency} ->
-        sum = a1 + a2
-        %Money{amount: sum, currency: currency}
-
-      {:error, reason} ->
-        IO.puts(reason)
-    end
-  end
-
-  def add(%Money{:amount => money_amount, :currency => currency}, amount) do
-    sum = money_amount + floor(amount * 100)
-    %Money{amount: sum, currency: currency}
-  end
-
-  def validate_same_currency(c1, c2) do
-    if c1 === c2 do
-      {:ok, c1}
-    else
-      {:error,
-       "Não é possível somar moedas diferentes." <>
-         " Moedas: #{c1} e #{c2}."}
-    end
-  end
-
-  def parse_amount(amount) do
-    {value, _} = Float.parse(amount)
-    # converting amount to cents
-    floor(value * 100)
+  def add(a, b) do
+    raise ArgumentError,
+      message: "Não é possível somar moedas diferentes. Moedas: #{a.currency} e #{b.currency}"
   end
 end
