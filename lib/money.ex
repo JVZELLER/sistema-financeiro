@@ -12,11 +12,15 @@ defmodule Money do
     currency = Currency.find!(currency_code)
     # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
     factor = Currency.get_factor(currency)
-    %Money{amount: amount * factor, currency: Currency.to_atom(currency)}
+    %Money{amount: round(amount * factor), currency: Currency.to_atom(currency)}
   end
 
   def add(%Money{currency: currency} = a, %Money{currency: currency} = b) do
     %Money{amount: a.amount + b.amount, currency: currency}
+  end
+
+  def add(%Money{currency: currency} = a, b) when is_integer(b) or is_float(b) do
+    add(a, Money.new(b, currency))
   end
 
   def add(a, b) do
