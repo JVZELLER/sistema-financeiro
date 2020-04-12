@@ -1,18 +1,19 @@
 defmodule AccountRepository do
-  require Account
-
   def all do
     read_accounts_from_csv()
-      |> parse_account_data()
+    |> parse_account_data()
   end
 
   def read_accounts_from_csv do
-    # TODO: Get relative path from system
-    filename = "/home/zeller/Downloads/Projects/sistema-financeiro/lib/users.csv"
+    filename = Path.expand("lib/users.csv")
+
     case File.read(filename) do
-      {:ok, content} -> String.trim(content)
-      {:error, reason} -> IO.puts "Não consegui ler o arquivo: #{filename}... :("
-                          IO.puts "#{:file.format_error reason}\n"
+      {:ok, content} ->
+        String.trim(content)
+
+      {:error, reason} ->
+        IO.puts("Não foi possível ler o arquivo: #{filename}... :(")
+        IO.puts("#{:file.format_error(reason)}\n")
     end
   end
 
@@ -23,10 +24,13 @@ defmodule AccountRepository do
 
   def parse_lines(headers, accounts) do
     attributes = String.split(headers, ",")
+
     Enum.reduce(accounts, %{}, fn account, accounts_map ->
       fields = String.split(account, ",")
-      code = hd fields
-      account = Enum.zip(attributes, fields)
+      code = hd(fields)
+
+      account =
+        Enum.zip(attributes, fields)
         |> Enum.into(%{})
         |> Account.new()
 
