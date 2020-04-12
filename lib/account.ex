@@ -1,7 +1,7 @@
 defmodule Account do
   require Money
 
-  defstruct code: "", owner: "", balance: %Money{}
+  defstruct [:code, :owner, :balance]
 
   def new(%{
         "code" => code,
@@ -12,7 +12,7 @@ defmodule Account do
     %{
       code: code,
       owner: owner,
-      balance: Money.new(%{"amount" => balance, "currency_code" => currency_code})
+      balance: Money.new(balance, currency_code)
     }
   end
 end
