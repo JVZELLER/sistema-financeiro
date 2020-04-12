@@ -4,13 +4,8 @@ defmodule Money do
   """
   defstruct [:amount, :currency]
 
-  def new(amount, currency_code) when is_integer(amount) do
+  def new(amount, currency_code \\ :BRL) when is_integer(amount) or is_float(amount) do
     create(amount, currency_code)
-  end
-
-  def new(string_amount, currency_code) when is_binary(string_amount) do
-    {parsed_amount, _} = Integer.parse(string_amount)
-    create(parsed_amount, currency_code)
   end
 
   defp create(amount, currency_code) do
@@ -26,6 +21,10 @@ defmodule Money do
 
   def add(a, b) do
     raise_different_currencies(a, b)
+  end
+
+  def divide(%Money{amount: amount, currency: currency}, split) do
+    %Money{amount: amount / split, currency: currency}
   end
 
   def raise_different_currencies(a, b) do
