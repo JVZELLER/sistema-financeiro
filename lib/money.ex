@@ -25,7 +25,11 @@ defmodule Money do
   end
 
   def add(a, b) do
+    raise_different_currencies(a, b)
+  end
+
+  def raise_different_currencies(a, b) do
     raise ArgumentError,
-      message: "Não é possível somar moedas diferentes. Moedas: #{a.currency} e #{b.currency}"
+      message: "Não é possível realizar operações com moedas diferentes. Moedas: #{a.currency} e #{b.currency}"
   end
 end
