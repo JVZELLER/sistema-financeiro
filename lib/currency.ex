@@ -14,12 +14,12 @@ defmodule Currency do
       is_atom(alpha_code) ->
         Atom.to_string(alpha_code)
         |> String.upcase()
-        |> String.to_existing_atom()
+        |> String.to_atom()
         |> get()
 
       is_binary(alpha_code) ->
         String.upcase(alpha_code)
-        |> String.to_existing_atom()
+        |> String.to_atom()
         |> get()
     end
   end
