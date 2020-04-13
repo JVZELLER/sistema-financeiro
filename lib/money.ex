@@ -28,21 +28,40 @@ defmodule Money do
   end
 
   def divide(%Money{currency: currency} = m, denominator) when is_integer(denominator) do
+    raise_if_not_valid_denominator(denominator)
     div = div(m.amount, denominator)
     rem = rem(m.amount, denominator)
     do_alocate(div, rem, currency, denominator)
   end
 
   defp do_alocate(value, rem, currency, times) do
-     cond do
-       rem > 0 and times > 0 -> [%Money{amount: value + 1, currency: currency} | do_alocate(value, rem - 1, currency, times - 1)]
-       rem <= 0 and times > 0 -> [%Money{amount: value, currency: currency} | do_alocate(value, rem, currency, times - 1)]
-       true -> []
-     end
+    cond do
+      rem > 0 and times > 0 ->
+        [
+          %Money{amount: value + 1, currency: currency}
+          | do_alocate(value, rem - 1, currency, times - 1)
+        ]
+
+      rem <= 0 and times > 0 ->
+        [%Money{amount: value, currency: currency} | do_alocate(value, rem, currency, times - 1)]
+
+      true ->
+        []
+    end
   end
 
-  def raise_different_currencies(a, b) do
+  defp raise_different_currencies(a, b) do
     raise ArgumentError,
-      message: "Não é possível realizar operações com moedas diferentes. Moedas: #{a.currency} e #{b.currency}"
+      message:
+        "Não é possível realizar operações com moedas diferentes. Moedas: #{a.currency} e #{
+          b.currency
+        }"
+  end
+
+  defp raise_if_not_valid_denominator(denominator) do
+    if denominator <= 0 do
+      raise ArgumentError,
+        message: "Denominador precisa ser maior que zero"
+    end
   end
 end
