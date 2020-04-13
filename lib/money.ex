@@ -50,6 +50,17 @@ defmodule Money do
     end
   end
 
+  def multiply(%Money{currency: currency} = a, b) when is_integer(b) or is_float(b) do
+    float_amount = float_value(a)
+    do_new!(float_amount * b, currency)
+  end
+
+  defp float_value(%Money{currency: currency} = m) do
+    currency_v = Currency.find!(currency)
+    factor = Currency.get_factor(currency_v)
+    Float.round(m.amount / factor, currency_v.exponent)
+  end
+
   defp raise_different_currencies(a, b) do
     raise ArgumentError,
       message:
