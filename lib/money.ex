@@ -27,8 +27,18 @@ defmodule Money do
     raise_different_currencies(a, b)
   end
 
-  def divide(%Money{amount: amount, currency: currency}, split) do
-    %Money{amount: amount / split, currency: currency}
+  def divide(%Money{currency: currency} = m, denominator) when is_integer(denominator) do
+    div = div(m.amount, denominator)
+    rem = rem(m.amount, denominator)
+    alocate(div, rem, currency, denominator)
+  end
+
+  defp alocate(value, rem, currency, times) do
+     cond do
+       rem > 0 and times > 0 -> [%Money{amount: value + 1, currency: currency} | alocate(value, rem - 1, currency, times - 1)]
+       rem <= 0 and times > 0 -> [%Money{amount: value, currency: currency} | alocate(value, rem, currency, times - 1)]
+       true -> []
+     end
   end
 
   def raise_different_currencies(a, b) do
