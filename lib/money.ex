@@ -5,10 +5,10 @@ defmodule Money do
   defstruct [:amount, :currency]
 
   def new(amount, currency_code \\ :BRL) when is_integer(amount) or is_float(amount) do
-    create(amount, currency_code)
+    do_new!(amount, currency_code)
   end
 
-  defp create(amount, currency_code) do
+  defp do_new!(amount, currency_code) do
     currency = Currency.find!(currency_code)
     # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
     factor = Currency.get_factor(currency)
