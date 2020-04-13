@@ -30,13 +30,13 @@ defmodule Money do
   def divide(%Money{currency: currency} = m, denominator) when is_integer(denominator) do
     div = div(m.amount, denominator)
     rem = rem(m.amount, denominator)
-    alocate(div, rem, currency, denominator)
+    do_alocate(div, rem, currency, denominator)
   end
 
-  defp alocate(value, rem, currency, times) do
+  defp do_alocate(value, rem, currency, times) do
      cond do
-       rem > 0 and times > 0 -> [%Money{amount: value + 1, currency: currency} | alocate(value, rem - 1, currency, times - 1)]
-       rem <= 0 and times > 0 -> [%Money{amount: value, currency: currency} | alocate(value, rem, currency, times - 1)]
+       rem > 0 and times > 0 -> [%Money{amount: value + 1, currency: currency} | do_alocate(value, rem - 1, currency, times - 1)]
+       rem <= 0 and times > 0 -> [%Money{amount: value, currency: currency} | do_alocate(value, rem, currency, times - 1)]
        true -> []
      end
   end
