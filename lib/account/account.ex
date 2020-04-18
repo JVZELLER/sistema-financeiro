@@ -1,5 +1,5 @@
 defmodule Account do
-  require Money
+  @moduledoc false
 
   defstruct [:code, :owner, :balance]
 
