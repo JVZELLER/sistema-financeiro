@@ -3,6 +3,8 @@ defmodule Currency do
   Estrutura de dados que representa moedas, seguindo os padrões da ISO 4217
   """
 
+  alias __MODULE__, as: Currency
+
   defstruct alpha_code: "BRL",
             numeric_code: 986,
             exponent: 2,
