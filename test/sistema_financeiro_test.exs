@@ -3,6 +3,6 @@ defmodule SistemaFinanceiroTest do
   doctest SistemaFinanceiro
 
   test "greets the world" do
-    assert SistemaFinanceiro.hello() == :world
+    assert SistemaFinanceiro.start() == :start
   end
 end

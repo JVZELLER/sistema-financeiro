@@ -1,0 +1,25 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    container:
+      image: elixir:1.10
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Format
+        run: mix format --check-formatted
+
+      - name: Install dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+
+      - name: Runs Tests
+        run: mix test

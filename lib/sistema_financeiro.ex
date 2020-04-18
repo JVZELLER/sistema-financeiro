@@ -1,5 +1,5 @@
 defmodule SistemaFinanceiro do
   def start do
-    IO.puts("Hello")
+    :start
   end
 end
