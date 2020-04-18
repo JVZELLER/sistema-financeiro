@@ -1,10 +1,19 @@
-defmodule AccountRepository do
+defmodule Repository.Account.CSVRepository do
+  @moduledoc """
+    Provides Account data from CSV file
+  """
+
+  @behaviour Repository
+
   def all do
-    read_accounts_from_csv()
-    |> parse_account_data()
+    accounts =
+      read_accounts_from_csv()
+      |> parse_account_data()
+
+    {:ok, accounts}
   end
 
-  def read_accounts_from_csv do
+  defp read_accounts_from_csv do
     filename = Path.expand("lib/users.csv")
 
     case File.read(filename) do
@@ -17,12 +26,12 @@ defmodule AccountRepository do
     end
   end
 
-  def parse_account_data(data) do
+  defp parse_account_data(data) do
     [headers | accounts] = String.split(data, ~r(\n))
     parse_lines(headers, accounts)
   end
 
-  def parse_lines(headers, accounts) do
+  defp parse_lines(headers, accounts) do
     attributes = String.split(headers, ",")
 
     Enum.reduce(accounts, %{}, fn account, accounts_map ->
