@@ -1,4 +1,4 @@
-![build](https://github.com/JVZELLER/sistema-financeiro/workflows/Continuos%20integration%20Workflow/badge.svg?branch=develop)
+![build](https://github.com/JVZELLER/sistema-financeiro/workflows/build/badge.svg?branch=develop)
 
 # SistemaFinanceiro
 
