@@ -18,11 +18,11 @@ defmodule Currency do
   ## Examples:
   ```
     iex> Currency.find!(:BRL)
-    {:ok, Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}
+    {:ok, %Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}}
     iex> Currency.find!(:usd)
-    {:ok, Currency{alpha_code: "USD", exponent: 2, name: "US Dollar", numeric_code: 840, symbol: "$"}
+    {:ok, %Currency{alpha_code: "USD", exponent: 2, name: "US Dollar", numeric_code: 840, symbol: "$"}}
     iex> Currency.find!("brl")
-    {:ok, Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}
+    {:ok, %Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}}
     iex> Currency.find!(86)
     ** (ArgumentError) "86" must be atom or string
   """
@@ -49,10 +49,9 @@ defmodule Currency do
 
   ## Examples:
   ```
-    iex> Currency.get_factor(Currency.find!(:BRL))
-    200
-    iex> Currency.get_factor(Currency.find!(:JPY))
-    0
+    iex> {:ok, brl} = Currency.find!(:BRL)
+    iex> Currency.get_factor(brl)
+    100
   """
   def get_factor(%Currency{exponent: exponent}) do
     :math.pow(10, exponent) |> round()
@@ -72,10 +71,9 @@ defmodule Currency do
 
   ## Examples:
   ```
-    iex> Currency.to_atom(Currency.find!(:JPY)
+    iex> {:ok, jpy} = Currency.find!(:JPY)
+    iex> Currency.to_atom(jpy)
     :JPY
-    iex> Currency.to_atom(Currency.find!(:BRL)
-    :BRL
   """
   def to_atom(%Currency{alpha_code: alpha_code}) do
     alpha_code |> String.to_existing_atom()
