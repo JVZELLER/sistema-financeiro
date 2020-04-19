@@ -3,12 +3,7 @@ defmodule Account do
 
   defstruct [:code, :owner, :balance]
 
-  def new(%{
-        "code" => code,
-        "owner" => owner,
-        "balance" => balance,
-        "currency_code" => currency_code
-      }) do
+  def new(code, owner, balance, currency_code) do
     %{
       code: code,
       owner: owner,
