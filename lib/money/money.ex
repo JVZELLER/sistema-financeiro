@@ -9,7 +9,7 @@ defmodule Money do
   end
 
   defp do_new!(amount, currency_code) do
-    currency = Currency.find!(currency_code)
+    {:ok, currency} = Currency.find!(currency_code)
     # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
     factor = Currency.get_factor(currency)
     %Money{amount: round(amount * factor), currency: Currency.to_atom(currency)}
