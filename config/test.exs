@@ -1,5 +1,5 @@
 import Config
 
 config :sistema_financeiro,
-       :account_repository,
-       SistemaFinanceiro.Repository.Account.InMemoryRepository
+account_database: Repository.Account.InMemoryDatabase,
+currency_database: Repository.Currency.InMemoryDatabase
