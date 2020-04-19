@@ -1,5 +1,12 @@
-defmodule CurrencyRepository do
-  def all do
+defmodule Repository.Currency.InMemoryDatabase do
+  @moduledoc """
+    Provides in memory currency data
+  """
+
+  @doc """
+    Get all currency data
+  """
+  def all_data do
     %{
       BRL: %Currency{
         alpha_code: "BRL",
