@@ -6,8 +6,6 @@ defmodule Currency do
   alias __MODULE__, as: Currency
   alias Repository.Currency.CurrencyRepository, as: CurrencyRepository
 
-  @currencies CurrencyRepository.all()
-
   defstruct alpha_code: "BRL",
             numeric_code: 986,
             exponent: 2,
@@ -61,7 +59,7 @@ defmodule Currency do
   end
 
   defp get!(alpha_code) do
-    {_ok, currencies} = @currencies
+    {_ok, currencies} = CurrencyRepository.all()
 
     case Map.fetch(currencies, alpha_code) do
       {:ok, currency} -> {:ok, currency}
