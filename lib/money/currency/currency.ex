@@ -4,6 +4,7 @@ defmodule Currency do
   """
 
   alias __MODULE__, as: Currency
+  alias Repository.Currency.CurrencyRepository, as: CurrencyRepository
 
   defstruct alpha_code: "BRL",
             numeric_code: 986,
@@ -31,8 +32,8 @@ defmodule Currency do
   end
 
   defp get(alpha_code) do
-    currencies = CurrencyRepository.all()
-    currencies[alpha_code]
+    {:ok, currencies} = CurrencyRepository.all()
+    {:ok, currencies[alpha_code]}
   end
 
   def to_atom(%Currency{alpha_code: alpha_code}) do
