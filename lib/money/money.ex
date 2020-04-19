@@ -27,7 +27,8 @@ defmodule Money do
   """
   def new(amount, currency_code \\ :BRL) when is_integer(amount) or is_float(amount) do
     do_new!(amount, currency_code)
-  rescue e -> {:error, e.message}
+  rescue
+    e -> {:error, e.message}
   end
 
   defp do_new!(amount, currency_code) do
@@ -151,8 +152,7 @@ defmodule Money do
 
   defp raise_different_currencies(a, b) do
     raise ArgumentError,
-      message:
-        "Monies with different currencies. Got #{a.currency} and #{b.currency}"
+      message: "Monies with different currencies. Got #{a.currency} and #{b.currency}"
   end
 
   defp raise_if_not_integer(value) do

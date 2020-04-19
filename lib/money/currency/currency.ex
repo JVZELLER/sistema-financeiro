@@ -41,7 +41,8 @@ defmodule Currency do
         |> String.to_atom()
         |> get!()
 
-      true -> raise(ArgumentError, message: "\"#{alpha_code}\" must be atom or string")
+      true ->
+        raise(ArgumentError, message: "\"#{alpha_code}\" must be atom or string")
     end
   end
 
