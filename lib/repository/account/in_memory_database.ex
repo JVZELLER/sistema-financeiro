@@ -2,7 +2,7 @@ defmodule Repository.Account.InMemoryDatabase do
   @moduledoc """
     Provides in memory accounts data
   """
-  
+
   @doc """
     Get all account data
   """
