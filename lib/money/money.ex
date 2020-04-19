@@ -1,6 +1,6 @@
 defmodule Money do
   @moduledoc """
-  Represents a Money type, inpired in [Martin Fowler's Money Patter](https://martinfowler.com/eaaCatalog/money.html)
+  Represents a Money type, inspired in [Martin Fowler's Money Patter](https://martinfowler.com/eaaCatalog/money.html)
   """
 
   defstruct [:amount, :currency]
