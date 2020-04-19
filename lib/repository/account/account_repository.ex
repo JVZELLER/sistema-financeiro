@@ -5,19 +5,17 @@ defmodule Repository.Account.AccountRepository do
 
   @behaviour Repository
 
-  @repository Application.get_env(
-                :sistema_financeiro,
-                :account_repository,
-                Repository.Account.CSVRepository
-              )
-
   def all do
     {:ok, do_all()}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, e}
   end
 
   defp do_all do
-    @repository.all()
+    database().all_data()
+  end
+
+  defp database do
+    Application.get_env(:sistema_financeiro, :account_database)
   end
 end
