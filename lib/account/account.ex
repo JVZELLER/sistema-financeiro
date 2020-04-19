@@ -1,6 +1,6 @@
 defmodule Account do
   @moduledoc """
-  Defines an Account type
+    Represents an Account type
   """
 
   defstruct [:code, :owner, :balance]
