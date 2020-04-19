@@ -1,8 +1,4 @@
 defmodule SistemaFinanceiroTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest SistemaFinanceiro
-
-  test "starts the app" do
-    assert SistemaFinanceiro.start() == :start
-  end
 end
