@@ -4,24 +4,24 @@ defmodule MoneyTest do
 
   describe "tests Money creation" do
     test "new/1" do
-      assert Money.new(1) ==  %Money{amount: 100, currency: :BRL}
-      assert Money.new(2.5) ==  %Money{amount: 250, currency: :BRL}
+      assert Money.new(1) == %Money{amount: 100, currency: :BRL}
+      assert Money.new(2.5) == %Money{amount: 250, currency: :BRL}
     end
 
     test "new/2" do
-      assert Money.new(1, :USD) ==  %Money{amount: 100, currency: :USD}
-      assert Money.new(2.5, :BRL) ==  %Money{amount: 250, currency: :BRL}
+      assert Money.new(1, :USD) == %Money{amount: 100, currency: :USD}
+      assert Money.new(2.5, :BRL) == %Money{amount: 250, currency: :BRL}
       assert Money.new(20, :XJK) == {:error, "Currency XJK not found"}
     end
 
     test "new!/1" do
-      assert Money.new(1) ==  %Money{amount: 100, currency: :BRL}
-      assert Money.new(4.77) ==  %Money{amount: 477, currency: :BRL}
+      assert Money.new(1) == %Money{amount: 100, currency: :BRL}
+      assert Money.new(4.77) == %Money{amount: 477, currency: :BRL}
     end
 
     test "new!/2" do
-      assert Money.new(1, :USD) ==  %Money{amount: 100, currency: :USD}
-      assert Money.new(1.75, :USD) ==  %Money{amount: 175, currency: :USD}
+      assert Money.new(1, :USD) == %Money{amount: 100, currency: :USD}
+      assert Money.new(1.75, :USD) == %Money{amount: 175, currency: :USD}
       assert_raise ArgumentError, fn -> Money.new!(1, :USB) end
     end
   end
@@ -42,14 +42,14 @@ defmodule MoneyTest do
   describe "tests Money.divide" do
     test "divide/2" do
       assert Money.divide(Money.new(5), 2) == [
-        Money.new(2.5),
-        Money.new(2.5)
-      ]
+               Money.new(2.5),
+               Money.new(2.5)
+             ]
 
       assert Money.divide(Money.new(99, :USD), 2) == [
-        Money.new(49.5, :USD),
-        Money.new(49.5, :USD)
-      ]
+               Money.new(49.5, :USD),
+               Money.new(49.5, :USD)
+             ]
     end
 
     test "divide/2 raise not integer" do
@@ -57,7 +57,7 @@ defmodule MoneyTest do
     end
 
     test "divide/2 raise not greater than zero" do
-      assert_raise ArgumentError, fn -> Money.divide(Money.new(50),  -2) end
+      assert_raise ArgumentError, fn -> Money.divide(Money.new(50), -2) end
     end
   end
 

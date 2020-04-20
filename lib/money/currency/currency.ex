@@ -26,7 +26,8 @@ defmodule Currency do
   """
   def find(alpha_code) do
     find!(alpha_code)
-  rescue ArgumentError -> nil
+  rescue
+    ArgumentError -> nil
   end
 
   @doc """

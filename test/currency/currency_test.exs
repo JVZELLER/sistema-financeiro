@@ -4,30 +4,33 @@ defmodule CurrencyTest do
 
   test "find/1" do
     assert Currency.find(:BRL) == %Currency{
-      alpha_code: "BRL",
-      numeric_code: 986,
-      exponent: 2,
-      name: "Brazilian Real",
-      symbol: "R$"
-    }
+             alpha_code: "BRL",
+             numeric_code: 986,
+             exponent: 2,
+             name: "Brazilian Real",
+             symbol: "R$"
+           }
+
     assert Currency.find(:BIT) == nil
   end
 
   test "find!/1" do
     assert Currency.find!(:BRL) == %Currency{
-      alpha_code: "BRL",
-      numeric_code: 986,
-      exponent: 2,
-      name: "Brazilian Real",
-      symbol: "R$"
-    }
+             alpha_code: "BRL",
+             numeric_code: 986,
+             exponent: 2,
+             name: "Brazilian Real",
+             symbol: "R$"
+           }
+
     assert Currency.find!(:JPY) == %Currency{
-      alpha_code: "JPY",
-      numeric_code: 392,
-      exponent: 0,
-      name: "Yen",
-      symbol: "¥"
-    }
+             alpha_code: "JPY",
+             numeric_code: 392,
+             exponent: 0,
+             name: "Yen",
+             symbol: "¥"
+           }
+
     assert_raise ArgumentError, fn -> Currency.find!(:BIT) end
   end
 
@@ -37,7 +40,7 @@ defmodule CurrencyTest do
   end
 
   test "to_atom/1" do
-  assert Currency.to_atom(Currency.find(:USD)) == :USD
-  assert Currency.to_atom(Currency.find(:CNY)) == :CNY
+    assert Currency.to_atom(Currency.find(:USD)) == :USD
+    assert Currency.to_atom(Currency.find(:CNY)) == :CNY
   end
 end
