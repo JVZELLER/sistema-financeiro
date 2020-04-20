@@ -102,6 +102,27 @@ defmodule Money do
   end
 
   @doc """
+  Divides `Money` from a given list of ratios
+
+  ## Examples:
+  ```
+    iex> Money.divide(Money.new(7), [1, 9])
+    [%Money{amount: 70, currency: :BRL}, %Money{amount: 630, currency: :BRL}]
+    iex> Money.divide(Money.new(0.15), [3, 7])
+    [%Money{amount: 5, currency: :BRL}, %Money{amount: 10, currency: :BRL}]
+    iex> Money.divide(Money.new(0.10), [4, 6])
+    [%Money{amount: 5, currency: :BRL}, %Money{amount: 6, currency: :BRL}]
+    iex> Money.divide(Money.new(0.10), [4, "6"])
+    ** (ArgumentError) Value "6" must be integer
+  """
+  def divide(%Money{currency: currency} = m, ratios) when is_list(ratios) do
+    raise_if_not_valid_ratios(ratios)
+    divisions = calculate_values_by_ratio(ratios, m.amount)
+    rem = m.amount - sum_values(divisions)
+    do_alocate(divisions, rem, currency)
+  end
+
+  @doc """
   Divides `Money` from a given a denominator
 
   ## Examples:
@@ -123,6 +144,39 @@ defmodule Money do
     div = div(m.amount, denominator)
     rem = rem(m.amount, denominator)
     do_alocate(div, rem, currency, denominator)
+  end
+
+  defp calculate_values_by_ratio(ratios, amount) do
+    total_ratio = sum_values(ratios)
+    Enum.map(ratios, fn ratio -> div(amount * ratio, total_ratio) end)
+  end
+
+  defp sum_values(values) do
+    values |> Enum.reduce(fn value, acc -> value + acc end)
+  end
+
+  defp do_alocate([head | tail], rem, currency) do
+    amount =
+      if rem > 0 do
+        head + 1
+      else
+        head
+      end
+
+    money = %Money{amount: amount, currency: currency}
+
+    remainder =
+      if rem > 0 do
+        rem - 1
+      else
+        rem
+      end
+
+    if tail != [] do
+      [money | do_alocate(tail, remainder, currency)]
+    else
+      [money]
+    end
   end
 
   defp do_alocate(value, rem, currency, times) do
@@ -171,6 +225,13 @@ defmodule Money do
   defp raise_different_currencies(a, b) do
     raise ArgumentError,
       message: "Monies with different currencies. Got #{a.currency} and #{b.currency}"
+  end
+
+  defp raise_if_not_valid_ratios(ratios) do
+    Enum.each(ratios, fn ratio ->
+      raise_if_not_integer(ratio)
+      raise_if_not_greater_than_zero(ratio)
+    end)
   end
 
   defp raise_if_not_integer(value) do
