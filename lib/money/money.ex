@@ -32,7 +32,7 @@ defmodule Money do
   end
 
   defp do_new!(amount, currency_code) do
-    {_ok, currency} = Currency.find!(currency_code)
+    currency = Currency.find!(currency_code)
     # Fator usado para conversoes pre-operacoes e para exibicao do dinheiro
     factor = Currency.get_factor(currency)
     %Money{amount: round(amount * factor), currency: Currency.to_atom(currency)}
@@ -145,7 +145,7 @@ defmodule Money do
   end
 
   defp float_value(%Money{currency: currency} = m) do
-    {_ok, currency_v} = Currency.find!(currency)
+    currency_v = Currency.find!(currency)
     factor = Currency.get_factor(currency_v)
     Float.round(m.amount / factor, currency_v.exponent)
   end
