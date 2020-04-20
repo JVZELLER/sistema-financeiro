@@ -10,10 +10,10 @@ defmodule Account do
 
   ## Examples
     iex> Account.new("123", "Ze Doe", 100, :BRL)
-    %{code: "123", owner: "Ze Doe", balance: %Money{amount: 10000, currency: :BRL}}
+    %Account{code: "123", owner: "Ze Doe", balance: %Money{amount: 10000, currency: :BRL}}
   """
   def new(code, owner, balance, currency_code) do
-    %{
+    %Account{
       code: code,
       owner: owner,
       balance: Money.new(balance, currency_code)
