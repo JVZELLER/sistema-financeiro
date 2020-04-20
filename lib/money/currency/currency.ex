@@ -17,6 +17,23 @@ defmodule Currency do
 
   ## Examples:
   ```
+    iex> Currency.find(:BRL)
+    %Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}
+    iex> Currency.find(:usd)
+    %Currency{alpha_code: "USD", exponent: 2, name: "US Dollar", numeric_code: 840, symbol: "$"}
+    iex> Currency.find(:LBR)
+    nil
+  """
+  def find(alpha_code) do
+    find!(alpha_code)
+  rescue ArgumentError -> nil
+  end
+
+  @doc """
+  Finds `Currency` from a given `alpha_code`
+
+  ## Examples:
+  ```
     iex> Currency.find!(:BRL)
     %Currency{alpha_code: "BRL", exponent: 2, name: "Brazilian Real", numeric_code: 986, symbol: "R$"}
     iex> Currency.find!(:usd)
