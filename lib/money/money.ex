@@ -23,12 +23,29 @@ defmodule Money do
     iex> Money.new(5, "new_currency")
     {:error, "Currency NEW_CURRENCY not found"}
 
-  ```
   """
   def new(amount, currency_code \\ :BRL) when is_integer(amount) or is_float(amount) do
     do_new!(amount, currency_code)
   rescue
     e -> {:error, e.message}
+  end
+
+  @doc """
+  Creates a new `Money` type with amount and currency: Default currency is `:BRL`
+
+  ## Examples:
+  ```
+    iex> Money.new!(5)
+    %Money{amount: 500, currency: :BRL}
+    iex> Money.new!(5, :USD)
+    %Money{amount: 500, currency: :USD}
+    iex> Money.new!(5.78, :USD)
+    iex> Money.new!(5, "new_currency")
+    ** (ArgumentError) Currency NEW_CURRENCY not found
+
+  """
+  def new!(amount, currency_code \\ :BRL) when is_integer(amount) or is_float(amount) do
+    do_new!(amount, currency_code)
   end
 
   defp do_new!(amount, currency_code) do
@@ -89,18 +106,18 @@ defmodule Money do
 
   ## Examples:
   ```
-    iex> Money.divide!(Money.new(10), 2)
+    iex> Money.divide(Money.new(10), 2)
     [%Money{amount: 500, currency: :BRL}, %Money{amount: 500, currency: :BRL}]
-    iex> Money.divide!(Money.new(9), 3)
+    iex> Money.divide(Money.new(9), 3)
     [%Money{amount: 300, currency: :BRL}, %Money{amount: 300, currency: :BRL}, %Money{amount: 300, currency: :BRL}]
-    iex> Money.divide!(Money.new(9, :USD), 1)
+    iex> Money.divide(Money.new(9, :USD), 1)
     [%Money{amount: 900, currency: :USD}]
-    iex> Money.divide!(Money.new(5), "2")
+    iex> Money.divide(Money.new(5), "2")
     ** (ArgumentError) Value "2" must be integer
 
   ```
   """
-  def divide!(%Money{currency: currency} = m, denominator) do
+  def divide(%Money{currency: currency} = m, denominator) do
     raise_if_not_integer(denominator)
     raise_if_not_greater_than_zero(denominator)
     div = div(m.amount, denominator)
@@ -129,17 +146,18 @@ defmodule Money do
 
   ## Examples:
   ```
-    iex> Money.multiply!(Money.new(15, :USD), 2)
+    iex> Money.multiply(Money.new(15, :USD), 2)
     %Money{amount: 3000, currency: :USD}
-    iex> Money.multiply!(Money.new(750, :JPY), 3.5)
+    iex> Money.multiply(Money.new(750, :JPY), 3.5)
     %Money{amount: 2625, currency: :JPY}
-    iex> Money.multiply!(Money.new(750), "3.5")
+    iex> Money.multiply(Money.new(750), "3.5")
     ** (ArgumentError) Value "3.5" must be integer or float
 
   ```
   """
-  def multiply!(%Money{currency: currency} = a, b) do
+  def multiply(%Money{currency: currency} = a, b) do
     raise_if_not_integer_or_float(b)
+    raise_if_not_greater_than_zero(b)
     float_amount = float_value(a)
     do_new!(float_amount * b, currency)
   end
