@@ -222,6 +222,50 @@ defmodule Money do
     Float.round(m.amount / factor, currency_v.exponent)
   end
 
+  @doc """
+  Parse an amount to Money
+
+  ## Examples:
+  ```
+    iex> Money.parse("12")
+    %Money{amount: 1200, currency: :BRL}
+    iex> Money.parse("0,1")
+    %Money{amount: 10, currency: :BRL}
+    iex> Money.parse("12aa", :USD)
+    {:error, "Cannot parse value \\"12aa\\""}
+  """
+  def parse(amount, currency \\ :BRL) when is_binary(amount) do
+    parse!(amount, currency)
+  rescue e -> {:error, e.message}
+  end
+
+  @doc """
+  Parse an amount value to Money. Raises an error if the value is not a number
+
+  ## Examples:
+  ```
+    iex> Money.parse!("12")
+    %Money{amount: 1200, currency: :BRL}
+    iex> Money.parse!("0.1", :USD)
+    %Money{amount: 10, currency: :USD}
+    iex> Money.parse!("0,1")
+    %Money{amount: 10, currency: :BRL}
+    iex> Money.parse!("bad", :USD)
+    ** (ArgumentError) Cannot parse value "bad"
+  """
+  def parse!(amount, currency \\ :BRL) when is_binary(amount) do
+    raise_if_not_number(amount)
+    {_int, floating} = Integer.parse(amount)
+
+    if floating !== "" do
+      {value, _} = String.replace(amount, ",", ".") |> Float.parse()
+      do_new!(value, currency)
+    else
+      {value, _} = Integer.parse(amount)
+      do_new!(value, currency)
+    end
+  end
+
   defp raise_different_currencies(a, b) do
     raise ArgumentError,
       message: "Monies with different currencies. Got #{a.currency} and #{b.currency}"
@@ -252,6 +296,13 @@ defmodule Money do
     if value <= 0 do
       raise ArgumentError,
         message: "Value \"#{value}\" must be greater than zero"
+    end
+  end
+
+  defp raise_if_not_number(number) do
+    if !String.match?(number, ~r/^[\+\-]?\d*\,?\d*\.?\d+(?:[\+\-]?\d+)?$/) do
+      raise ArgumentError,
+        message: "Cannot parse value \"#{number}\""
     end
   end
 end
