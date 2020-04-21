@@ -223,7 +223,7 @@ defmodule Money do
   end
 
   @doc """
-  Parse an amount to Money
+  Parse an amount to `Money`
 
   ## Examples:
   ```
@@ -236,11 +236,12 @@ defmodule Money do
   """
   def parse(amount, currency \\ :BRL) when is_binary(amount) do
     parse!(amount, currency)
-  rescue e -> {:error, e.message}
+  rescue
+    e -> {:error, e.message}
   end
 
   @doc """
-  Parse an amount value to Money. Raises an error if the value is not a number
+  Parse an amount value to `Money`. Raises an error if the value is not a number
 
   ## Examples:
   ```
@@ -264,6 +265,26 @@ defmodule Money do
       {value, _} = Integer.parse(amount)
       do_new!(value, currency)
     end
+  end
+
+  @doc """
+  Converts `Money` to formated string with properly symbol and number of decimal cases
+
+  ## Examples:
+  ```
+    iex> Money.to_string(Money.new(4))
+    "R$ 4.00"
+    iex> Money.to_string(Money.new(25, :USD))
+    "$ 25.00"
+  """
+  def to_string(%Money{currency: currency_code} = m) do
+    currency = Currency.find!(currency_code)
+    factor = Currency.get_factor(currency)
+    formated_value =
+      m.amount / factor
+      |> :erlang.float_to_binary(decimals: currency.exponent)
+
+    "#{currency.symbol} #{formated_value}"
   end
 
   defp raise_different_currencies(a, b) do
