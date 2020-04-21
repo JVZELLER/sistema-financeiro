@@ -5,6 +5,8 @@ defmodule Money do
 
   defstruct [:amount, :currency]
 
+  @number ~r/^[\+\-]?\d*\,?\d*\.?\d+(?:[\+\-]?\d+)?$/
+
   @doc """
   Creates a new `Money` type with amount and currency: Default currency is `:BRL`
 
@@ -280,8 +282,9 @@ defmodule Money do
   def to_string(%Money{currency: currency_code} = m) do
     currency = Currency.find!(currency_code)
     factor = Currency.get_factor(currency)
+
     formated_value =
-      m.amount / factor
+      (m.amount / factor)
       |> :erlang.float_to_binary(decimals: currency.exponent)
 
     "#{currency.symbol} #{formated_value}"
@@ -321,7 +324,7 @@ defmodule Money do
   end
 
   defp raise_if_not_number(number) do
-    if !String.match?(number, ~r/^[\+\-]?\d*\,?\d*\.?\d+(?:[\+\-]?\d+)?$/) do
+    if !String.match?(number, @number) do
       raise ArgumentError,
         message: "Cannot parse value \"#{number}\""
     end
