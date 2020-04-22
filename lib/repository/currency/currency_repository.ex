@@ -11,6 +11,10 @@ defmodule Repository.Currency.CurrencyRepository do
     e -> {:error, e}
   end
 
+  def find(_param) do
+    {:ok, []}
+  end
+
   defp do_all do
     database().all_data()
   end
