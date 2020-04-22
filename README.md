@@ -45,3 +45,9 @@ Nossa `view` é representada pelo módulo `SistemaFinanceiro`, cuja responsabili
 A `controller` simplesmente repassa as requisições que nela chegam para a camada de `serviço` (módulo `SistemaFinanceiro.AccountService`) que se encarrega de validar os dados e executar a ação requisitada.
 A nossa `service` consulta os dados da aplicação através da camada de `repositórios` (módulos  `Repository.AccountRepository`, `Repository.CurrencyRepository` e `Repository.ExchangeRateRepository`).
 Os dados estão armazenados em memória (módulos `InMemoryDatabase`) e definidos nas configurações de acordo com o ambiente que o sistema está sendo executado (PRD, TEST ou DEV). Cada repositório, antes de realizar suas operações verifica qual tipo de `database` deve usar de acordo com o ambiente, deixando assim uma forma flexível para novas implementações de consultas em diferentes bancos de dados.
+
+## Fontes
+- [Elixir School](https://elixirschool.com/pt/)
+- [Elixir Style Guide](https://github.com/christopheradams/elixir_style_guide/blob/master/README.md)
+- [Elixir in Action: Juric, Saša](https://www.amazon.com/Elixir-Action-Sa%C5%A1a-Juri-cacute/dp/1617295027)
+- [Plataformatec Blog](http://blog.plataformatec.com.br/)
