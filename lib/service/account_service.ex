@@ -3,7 +3,7 @@ defmodule SistemaFinanceiro.AccountService do
   A lightfull service to orchestrate incoming calls/requests actions from our controller
   """
 
-  alias Repository.Account.AccountRepository
+  alias Repository.AccountRepository
   alias Repository.ExchangeRateRepository
 
   @doc """
