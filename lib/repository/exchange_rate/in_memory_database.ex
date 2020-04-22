@@ -14,7 +14,7 @@ defmodule Repository.ExchangeRate.InMemoryDatabase do
       %{rate: 107.755, from: "USD", to: "JPY"},
       %{rate: 0.00928031, from: "JPY", to: "USD"},
       %{rate: 20.2671, from: "BRL", to: "JPY"},
-      %{rate: 0.0493412, from: "JPY", to: "BRL"},
+      %{rate: 0.0493412, from: "JPY", to: "BRL"}
     ]
   end
 end
