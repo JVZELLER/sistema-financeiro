@@ -4,7 +4,7 @@ defmodule Currency do
   """
 
   alias __MODULE__, as: Currency
-  alias Repository.Currency.CurrencyRepository, as: CurrencyRepository
+  alias Repository.CurrencyRepository, as: CurrencyRepository
 
   defstruct alpha_code: "BRL",
             numeric_code: 986,
