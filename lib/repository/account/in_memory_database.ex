@@ -9,8 +9,12 @@ defmodule Repository.Account.InMemoryDatabase do
   def all_data do
     [
       Account.new("1", "Zé Doe", 50, :BRL),
-      Account.new("2", "Ann Doe", 50, :USD),
-      Account.new("3", "Xang Doe", 50, :JPY)
+      Account.new("2", "Zeller Doe", 50, :BRL),
+      Account.new("3", "Ann Doe", 25, :USD),
+      Account.new("4", "Smith Doe", 100, :USD),
+      Account.new("5", "Xang Doe", 4550, :JPY),
+      Account.new("6", "Zang Doe", 50, :JPY),
+      Account.new("7", "Xan Jack", 70, :JPY)
     ]
   end
 end
