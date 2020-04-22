@@ -4,7 +4,12 @@ defmodule Repository do
   """
 
   @doc """
-    Get all data
+  Gets all data
   """
   @callback all() :: {:ok, data :: term} | {:error, reason :: term}
+
+  @doc """
+  Finds account by code
+  """
+  @callback find(term) :: {:ok, data :: term} | {:error, reason :: term}
 end
