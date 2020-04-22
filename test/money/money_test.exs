@@ -68,13 +68,10 @@ defmodule MoneyTest do
       assert Money.multiply(Money.new(3), 2.5) == Money.new(7.5)
     end
 
-    test "multiply/2 raise not integer or float" do
-      assert_raise ArgumentError, fn -> Money.multiply(Money.new(7.40), "2") end
-      assert_raise ArgumentError, fn -> Money.multiply(Money.new(7.40), :two) end
-    end
-
-    test "multiply/2 raise not greater than zero" do
-      assert_raise ArgumentError, fn -> Money.multiply(Money.new(7.40), -5) end
+    test "multiply/3" do
+      assert Money.multiply(Money.new(25), 2, :USD) == Money.new(50, :USD)
+      assert Money.multiply(Money.new(7.40), 2, :CNY) == Money.new(14.8, :CNY)
+      assert Money.multiply(Money.new(3, :USD), 2.5, :BRL) == Money.new(7.5)
     end
   end
 end

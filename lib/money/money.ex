@@ -213,7 +213,22 @@ defmodule Money do
   """
   def multiply(%Money{currency: currency} = a, b) do
     raise_if_not_integer_or_float(b)
-    raise_if_not_greater_than_zero(b)
+    float_amount = float_value(a)
+    do_new!(float_amount * b, currency)
+  end
+
+  @doc """
+  Multiplies `Money` by amount and create a new one with a given `Currency`
+
+  ## Examples:
+  ```
+    iex> Money.multiply(Money.new(15), 2, :USD)
+    %Money{amount: 3000, currency: :USD}
+    iex> Money.multiply(Money.new(750, :USD), 3.5, :JPY)
+    %Money{amount: 2625, currency: :JPY}
+  """
+  def multiply(%Money{amount: _a, currency: _c} = a, b, currency) do
+    raise_if_not_integer_or_float(b)
     float_amount = float_value(a)
     do_new!(float_amount * b, currency)
   end
