@@ -11,11 +11,32 @@ defmodule SistemaFinanceiro do
   alias SistemaFinanceiro.Controller
 
   @doc """
-  Starts the app
+  Starts the app by listing all accounts
 
   ## Examples
+  ```
     iex> SistemaFinanceiro.start()
-    :start
+    ################################
+                Accounts
+    ################################
+    Code     Owner          Balance
+    1        Zé Doe         R$ 50.00
+
+    2        Zeller Doe     R$ 50.00
+
+    3        Ann Doe        $ 25.00
+
+    4        Smith Doe      $ 100.00
+
+    5        Xang Doe       $ 25.00
+
+    6        Zang Doe       ¥ 50
+
+    7        Xan Jack       ¥ 25
+
+
+    (L)ist Accounts (S)plit Money (E)xchange (Q)uit:
+
   """
   def start do
     list_accounts()
