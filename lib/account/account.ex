@@ -9,6 +9,7 @@ defmodule Account do
   Create a new Account type.
 
   ## Examples
+  ```
     iex> Account.new("123", "Ze Doe", 100, :BRL)
     %Account{code: "123", owner: "Ze Doe", balance: %Money{amount: 10000, currency: :BRL}}
   """
