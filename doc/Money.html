@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.21.3">
+    <meta name="project" content="sistema_financeiro v0.1.0">
+    <title>Money — sistema_financeiro v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-0ab8a6a80ebaaa287431.css" />
+    <script src="dist/sidebar_items-334637ce02.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/app-a225d03098e64fef431a.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+sistema_financeiro      </a>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        <small class="app-vsn">sistema_financeiro v0.1.0</small>
+Money      </h1>
+
+
+        <section id="moduledoc">
+<p>Represents a Money type, inspired in <a href="https://martinfowler.com/eaaCatalog/money.html">Martin Fowler&#39;s Money Patter</a></p>
+        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#add/2">add(a, b)</a>
+  </div>
+    <div class="summary-synopsis"><p>Raises different currencies exception</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#divide/2">divide(m, ratios)</a>
+  </div>
+    <div class="summary-synopsis"><p>Divides <a href="#content"><code class="inline">Money</code></a> from a given a denominator</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#multiply/2">multiply(a, b)</a>
+  </div>
+    <div class="summary-synopsis"><p>Multiplies <a href="#content"><code class="inline">Money</code></a> by amount</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#multiply/3">multiply(a, b, currency)</a>
+  </div>
+    <div class="summary-synopsis"><p>Multiplies <a href="#content"><code class="inline">Money</code></a> by amount and create a new one with a given <a href="Currency.html"><code class="inline">Currency</code></a></p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new/2">new(amount, currency_code \\ :BRL)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a new <a href="#content"><code class="inline">Money</code></a> type with amount and currency: Default currency is <code class="inline">:BRL</code></p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new!/2">new!(amount, currency_code \\ :BRL)</a>
+  </div>
+    <div class="summary-synopsis"><p>Creates a new <a href="#content"><code class="inline">Money</code></a> type with amount and currency: Default currency is <code class="inline">:BRL</code></p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse/2">parse(amount, currency \\ :BRL)</a>
+  </div>
+    <div class="summary-synopsis"><p>Parse an amount to <a href="#content"><code class="inline">Money</code></a></p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#parse!/2">parse!(amount, currency \\ :BRL)</a>
+  </div>
+    <div class="summary-synopsis"><p>Parse an amount value to <a href="#content"><code class="inline">Money</code></a>. Raises an error if the value is not a number</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_string/1">to_string(m)</a>
+  </div>
+    <div class="summary-synopsis"><p>Converts <a href="#content"><code class="inline">Money</code></a> to formated string with properly symbol and number of decimal cases</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="add/2">
+  <div class="detail-header">
+    <a href="#add/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">add(a, b)</h1>
+  </div>
+  <section class="docstring">
+<p>Raises different currencies exception</p>
+<h2 id="add/2-examples" class="section-heading">
+  <a href="#add/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">add</span><span class="p" data-group-id="2483848509-1">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="2483848509-2">(</span><span class="mi">10</span><span class="p" data-group-id="2483848509-2">)</span><span class="p">,</span><span class="w"> </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="2483848509-3">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="2483848509-3">)</span><span class="p" data-group-id="2483848509-1">)</span><span class="w">
+  </span><span class="gt">** (ArgumentError) Monies with different currencies. Got BRL and USD</span><span class="w">
+</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="divide/2">
+  <div class="detail-header">
+    <a href="#divide/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">divide(m, ratios)</h1>
+  </div>
+  <section class="docstring">
+<p>Divides <a href="#content"><code class="inline">Money</code></a> from a given a denominator</p>
+<h2 id="divide/2-examples" class="section-heading">
+  <a href="#divide/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">divide</span><span class="p" data-group-id="1452830451-1">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1452830451-2">(</span><span class="mi">10</span><span class="p" data-group-id="1452830451-2">)</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1452830451-1">)</span><span class="w">
+  </span><span class="p" data-group-id="1452830451-3">[</span><span class="p" data-group-id="1452830451-4">%</span><span class="nc" data-group-id="1452830451-4">Money</span><span class="p" data-group-id="1452830451-4">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="1452830451-4">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1452830451-5">%</span><span class="nc" data-group-id="1452830451-5">Money</span><span class="p" data-group-id="1452830451-5">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="1452830451-5">}</span><span class="p" data-group-id="1452830451-3">]</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">divide</span><span class="p" data-group-id="1452830451-6">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1452830451-7">(</span><span class="mi">9</span><span class="p" data-group-id="1452830451-7">)</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="1452830451-6">)</span><span class="w">
+  </span><span class="p" data-group-id="1452830451-8">[</span><span class="p" data-group-id="1452830451-9">%</span><span class="nc" data-group-id="1452830451-9">Money</span><span class="p" data-group-id="1452830451-9">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="1452830451-9">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1452830451-10">%</span><span class="nc" data-group-id="1452830451-10">Money</span><span class="p" data-group-id="1452830451-10">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="1452830451-10">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1452830451-11">%</span><span class="nc" data-group-id="1452830451-11">Money</span><span class="p" data-group-id="1452830451-11">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="1452830451-11">}</span><span class="p" data-group-id="1452830451-8">]</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">divide</span><span class="p" data-group-id="1452830451-12">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1452830451-13">(</span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="1452830451-13">)</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1452830451-12">)</span><span class="w">
+  </span><span class="p" data-group-id="1452830451-14">[</span><span class="p" data-group-id="1452830451-15">%</span><span class="nc" data-group-id="1452830451-15">Money</span><span class="p" data-group-id="1452830451-15">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="1452830451-15">}</span><span class="p" data-group-id="1452830451-14">]</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">divide</span><span class="p" data-group-id="1452830451-16">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1452830451-17">(</span><span class="mi">5</span><span class="p" data-group-id="1452830451-17">)</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p" data-group-id="1452830451-16">)</span><span class="w">
+  </span><span class="gt">** (ArgumentError) Value &quot;2&quot; must be integer</span><span class="w">
+</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="multiply/2">
+  <div class="detail-header">
+    <a href="#multiply/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">multiply(a, b)</h1>
+  </div>
+  <section class="docstring">
+<p>Multiplies <a href="#content"><code class="inline">Money</code></a> by amount</p>
+<h2 id="multiply/2-examples" class="section-heading">
+  <a href="#multiply/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="4026904390-1">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="4026904390-2">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="4026904390-2">)</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4026904390-1">)</span><span class="w">
+  </span><span class="p" data-group-id="4026904390-3">%</span><span class="nc" data-group-id="4026904390-3">Money</span><span class="p" data-group-id="4026904390-3">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="4026904390-3">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="4026904390-4">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="4026904390-5">(</span><span class="mi">750</span><span class="p">,</span><span class="w"> </span><span class="ss">:JPY</span><span class="p" data-group-id="4026904390-5">)</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p" data-group-id="4026904390-4">)</span><span class="w">
+  </span><span class="p" data-group-id="4026904390-6">%</span><span class="nc" data-group-id="4026904390-6">Money</span><span class="p" data-group-id="4026904390-6">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">2625</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:JPY</span><span class="p" data-group-id="4026904390-6">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="4026904390-7">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="4026904390-8">(</span><span class="mi">750</span><span class="p" data-group-id="4026904390-8">)</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3.5&quot;</span><span class="p" data-group-id="4026904390-7">)</span><span class="w">
+  </span><span class="gt">** (ArgumentError) Value &quot;3.5&quot; must be integer or float</span><span class="w">
+</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="multiply/3">
+  <div class="detail-header">
+    <a href="#multiply/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">multiply(a, b, currency)</h1>
+  </div>
+  <section class="docstring">
+<p>Multiplies <a href="#content"><code class="inline">Money</code></a> by amount and create a new one with a given <a href="Currency.html"><code class="inline">Currency</code></a></p>
+<h2 id="multiply/3-examples" class="section-heading">
+  <a href="#multiply/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="8307246654-1">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="8307246654-2">(</span><span class="mi">15</span><span class="p" data-group-id="8307246654-2">)</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="8307246654-1">)</span><span class="w">
+  </span><span class="p" data-group-id="8307246654-3">%</span><span class="nc" data-group-id="8307246654-3">Money</span><span class="p" data-group-id="8307246654-3">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="8307246654-3">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">multiply</span><span class="p" data-group-id="8307246654-4">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="8307246654-5">(</span><span class="mi">750</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="8307246654-5">)</span><span class="p">,</span><span class="w"> </span><span class="mf">3.5</span><span class="p">,</span><span class="w"> </span><span class="ss">:JPY</span><span class="p" data-group-id="8307246654-4">)</span><span class="w">
+  </span><span class="p" data-group-id="8307246654-6">%</span><span class="nc" data-group-id="8307246654-6">Money</span><span class="p" data-group-id="8307246654-6">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">2625</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:JPY</span><span class="p" data-group-id="8307246654-6">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="new/2">
+    <span id="new/1"></span>
+  <div class="detail-header">
+    <a href="#new/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">new(amount, currency_code \\ :BRL)</h1>
+  </div>
+  <section class="docstring">
+<p>Creates a new <a href="#content"><code class="inline">Money</code></a> type with amount and currency: Default currency is <code class="inline">:BRL</code></p>
+<h2 id="new/2-examples" class="section-heading">
+  <a href="#new/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-1">(</span><span class="mi">5</span><span class="p" data-group-id="3591646090-1">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-2">%</span><span class="nc" data-group-id="3591646090-2">Money</span><span class="p" data-group-id="3591646090-2">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="3591646090-2">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-3">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-3">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-4">%</span><span class="nc" data-group-id="3591646090-4">Money</span><span class="p" data-group-id="3591646090-4">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-4">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-5">(</span><span class="mf">5.78</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-5">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-6">%</span><span class="nc" data-group-id="3591646090-6">Money</span><span class="p" data-group-id="3591646090-6">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">578</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-6">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-7">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;USD&quot;</span><span class="p" data-group-id="3591646090-7">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-8">%</span><span class="nc" data-group-id="3591646090-8">Money</span><span class="p" data-group-id="3591646090-8">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-8">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-9">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;usd&quot;</span><span class="p" data-group-id="3591646090-9">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-10">%</span><span class="nc" data-group-id="3591646090-10">Money</span><span class="p" data-group-id="3591646090-10">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="3591646090-10">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="3591646090-11">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;new_currency&quot;</span><span class="p" data-group-id="3591646090-11">)</span><span class="w">
+  </span><span class="p" data-group-id="3591646090-12">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Currency NEW_CURRENCY not found&quot;</span><span class="p" data-group-id="3591646090-12">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="new!/2">
+    <span id="new!/1"></span>
+  <div class="detail-header">
+    <a href="#new!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">new!(amount, currency_code \\ :BRL)</h1>
+  </div>
+  <section class="docstring">
+<p>Creates a new <a href="#content"><code class="inline">Money</code></a> type with amount and currency: Default currency is <code class="inline">:BRL</code></p>
+<h2 id="new!/2-examples" class="section-heading">
+  <a href="#new!/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new!</span><span class="p" data-group-id="9519107974-1">(</span><span class="mi">5</span><span class="p" data-group-id="9519107974-1">)</span><span class="w">
+  </span><span class="p" data-group-id="9519107974-2">%</span><span class="nc" data-group-id="9519107974-2">Money</span><span class="p" data-group-id="9519107974-2">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="9519107974-2">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new!</span><span class="p" data-group-id="9519107974-3">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9519107974-3">)</span><span class="w">
+  </span><span class="p" data-group-id="9519107974-4">%</span><span class="nc" data-group-id="9519107974-4">Money</span><span class="p" data-group-id="9519107974-4">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9519107974-4">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new!</span><span class="p" data-group-id="9519107974-5">(</span><span class="mf">5.78</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9519107974-5">)</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">new!</span><span class="p" data-group-id="9519107974-6">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;new_currency&quot;</span><span class="p" data-group-id="9519107974-6">)</span><span class="w">
+  </span><span class="gt">** (ArgumentError) Currency NEW_CURRENCY not found</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="parse/2">
+    <span id="parse/1"></span>
+  <div class="detail-header">
+    <a href="#parse/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">parse(amount, currency \\ :BRL)</h1>
+  </div>
+  <section class="docstring">
+<p>Parse an amount to <a href="#content"><code class="inline">Money</code></a></p>
+<h2 id="parse/2-examples" class="section-heading">
+  <a href="#parse/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse</span><span class="p" data-group-id="6247434794-1">(</span><span class="s">&quot;12&quot;</span><span class="p" data-group-id="6247434794-1">)</span><span class="w">
+  </span><span class="p" data-group-id="6247434794-2">%</span><span class="nc" data-group-id="6247434794-2">Money</span><span class="p" data-group-id="6247434794-2">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="6247434794-2">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse</span><span class="p" data-group-id="6247434794-3">(</span><span class="s">&quot;0,1&quot;</span><span class="p" data-group-id="6247434794-3">)</span><span class="w">
+  </span><span class="p" data-group-id="6247434794-4">%</span><span class="nc" data-group-id="6247434794-4">Money</span><span class="p" data-group-id="6247434794-4">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="6247434794-4">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse</span><span class="p" data-group-id="6247434794-5">(</span><span class="s">&quot;12aa&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="6247434794-5">)</span><span class="w">
+  </span><span class="p" data-group-id="6247434794-6">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Cannot parse value </span><span class="se">\&quot;</span><span class="s">12aa</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p" data-group-id="6247434794-6">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="parse!/2">
+    <span id="parse!/1"></span>
+  <div class="detail-header">
+    <a href="#parse!/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">parse!(amount, currency \\ :BRL)</h1>
+  </div>
+  <section class="docstring">
+<p>Parse an amount value to <a href="#content"><code class="inline">Money</code></a>. Raises an error if the value is not a number</p>
+<h2 id="parse!/2-examples" class="section-heading">
+  <a href="#parse!/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse!</span><span class="p" data-group-id="9106512002-1">(</span><span class="s">&quot;12&quot;</span><span class="p" data-group-id="9106512002-1">)</span><span class="w">
+  </span><span class="p" data-group-id="9106512002-2">%</span><span class="nc" data-group-id="9106512002-2">Money</span><span class="p" data-group-id="9106512002-2">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="9106512002-2">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse!</span><span class="p" data-group-id="9106512002-3">(</span><span class="s">&quot;0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9106512002-3">)</span><span class="w">
+  </span><span class="p" data-group-id="9106512002-4">%</span><span class="nc" data-group-id="9106512002-4">Money</span><span class="p" data-group-id="9106512002-4">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9106512002-4">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse!</span><span class="p" data-group-id="9106512002-5">(</span><span class="s">&quot;0,1&quot;</span><span class="p" data-group-id="9106512002-5">)</span><span class="w">
+  </span><span class="p" data-group-id="9106512002-6">%</span><span class="nc" data-group-id="9106512002-6">Money</span><span class="p" data-group-id="9106512002-6">{</span><span class="ss">amount</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="ss">currency</span><span class="p">:</span><span class="w"> </span><span class="ss">:BRL</span><span class="p" data-group-id="9106512002-6">}</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">parse!</span><span class="p" data-group-id="9106512002-7">(</span><span class="s">&quot;bad&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="9106512002-7">)</span><span class="w">
+  </span><span class="gt">** (ArgumentError) Cannot parse value &quot;bad&quot;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="to_string/1">
+  <div class="detail-header">
+    <a href="#to_string/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">to_string(m)</h1>
+  </div>
+  <section class="docstring">
+<p>Converts <a href="#content"><code class="inline">Money</code></a> to formated string with properly symbol and number of decimal cases</p>
+<h2 id="to_string/1-examples" class="section-heading">
+  <a href="#to_string/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples:
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="w">  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="1756337066-1">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1756337066-2">(</span><span class="mi">4</span><span class="p" data-group-id="1756337066-2">)</span><span class="p" data-group-id="1756337066-1">)</span><span class="w">
+  </span><span class="s">&quot;R$ 4.00&quot;</span><span class="w">
+  </span><span class="gp unselectable">iex&gt; </span><span class="nc">Money</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="1756337066-3">(</span><span class="nc">Money</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1756337066-4">(</span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="ss">:USD</span><span class="p" data-group-id="1756337066-4">)</span><span class="p" data-group-id="1756337066-3">)</span><span class="w">
+  </span><span class="s">&quot;$ 25.00&quot;</span></code></pre>
+  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.21.3),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>
